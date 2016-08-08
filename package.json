@@ -11,6 +11,10 @@
     "type": "git",
     "url": "https://github.com/emmabaye/timestamp-microservice"
   },
+  "dependencies": {
+    "express": "^4.12.4",
+    "moment": "~2.14.1"
+  },
   "author": "Emmanuel Abaye",
   "license": "MIT"
 }
