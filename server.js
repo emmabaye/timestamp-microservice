@@ -11,7 +11,7 @@ app.get('/', function(req, res){
 app.get('/:date', function(req, res){
 
 	//check if natural
-	var n = moment(req.params.date, ["MM DD YYYY", "YYYY MM DD"]);
+	var n = moment(req.params.date);
 
 	if(n.isValid()){
 		
