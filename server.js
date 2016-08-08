@@ -5,8 +5,10 @@ var moment = require('moment');
 
 var app = express();
 
+app.use('/public', express.static('public'));
+
 app.get('/', function(req, res){
-	res.send("<h1>Timestamp Microservice</h1>")
+	res.sendFile(process.cwd() + '/views/index.htm');
 });
 app.get('/:date', function(req, res){
 
@@ -22,20 +24,23 @@ app.get('/:date', function(req, res){
 	}
 
 	//check if unix
-	var m = moment(parseFloat(req.params.date) * 1000);
-	if(m.isValid()){
-		
-		return res.json({
-			"unix": m.unix(),
-			"natural":m.format("MMMM DD, YYYY")
-		});
+	if(!isNaN(req.params.date)){
+		var m = moment(parseFloat(req.params.date) * 1000);
+
+		if(m.isValid()){
+			
+			return res.json({
+				"unix": m.unix(),
+				"natural":m.format("MMMM DD, YYYY")
+			});
+		}
 	}
 
+		
 	return res.json({
 			"unix": null,
 			"natural":null
 		});
-	
 });
 
 var port = process.env.PORT || 3000;
